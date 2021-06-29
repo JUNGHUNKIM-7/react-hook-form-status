@@ -45,15 +45,40 @@ export default function CustomForm() {
     <>
       <StatusBar />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name", { required: true })} />
-        {errors.name && <p>This field is required</p>}
-        <input {...register("email", { required: true })} />
+        <input
+          {...register("name", {
+            required: "name is required",
+            minLength: { value: 4, message: "length should be 4" },
+          })}
+          placeholder="name"
+        />
+
+        {errors.name && <p>{errors.name?.message}</p>}
+
+        <input
+          {...register("email", {
+            required: "email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "double check your email",
+            },
+          })}
+          placeholder="email"
+        />
+
+        {errors.email ? (
+          <p>{errors.email?.message}</p>
+        ) : (
+          errors.email?.type === "pattern" && <p>{errors.email?.message}</p>
+        )}
+
         <input
           className="hidden"
           defaultValue={new Date(utc + KR_TIME_DIFF).toString()}
           {...register("date")}
         />
-        <button>Submit</button>
+
+        <input type="submit" />
       </form>
     </>
   );
