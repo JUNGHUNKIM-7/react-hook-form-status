@@ -1,9 +1,14 @@
 import { useEffect } from "react";
-import { EFORM, UseFormReducer } from "../helper/FormReducer";
+import { EFORM, TState, UseFormReducer } from "../helper/FormReducer";
 import { useRouter } from "next/router";
 
-export default function StatusBar() {
+export default function StatusBar({
+  status,
+}: {
+  status: Partial<TState["status"]>;
+}) {
   const { state, dispatch } = UseFormReducer();
+  const { success, err } = status;
   const router = useRouter();
 
   useEffect(() => {
@@ -31,9 +36,10 @@ export default function StatusBar() {
       {state.showModal ? (
         state.status.pending ? (
           <div className="bg-yellow-500">{state.form.name} is pending</div>
-        ) : state.status.success ? (
+        ) : success === true && state.status.success ? (
           <div className="bg-green-500">success</div>
         ) : (
+          err === true &&
           state.status.err && <div className="bg-red-500">err</div>
         )
       ) : null}

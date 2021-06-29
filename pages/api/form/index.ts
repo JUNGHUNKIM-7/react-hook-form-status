@@ -17,7 +17,11 @@ export default async function formHandler(
       email,
       date,
     };
-    await insertObj("form", dbObj);
-    res.status(201).json({ success: true });
+    try {
+      await insertObj("form", dbObj);
+      res.status(201).json({ success: true, err: false });
+    } catch (error) {
+      res.status(500).json({ success:false, err: true });
+    }
   }
 }

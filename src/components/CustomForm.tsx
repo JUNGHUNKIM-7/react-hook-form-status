@@ -1,13 +1,16 @@
 import React from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UseFormReducer, EFORM, TState } from "../helper/FormReducer";
 import StatusBar from "./StatusBar";
 
+const curr = new Date();
+const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+
 export default function CustomForm() {
-  const curr = new Date();
-  const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
-  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
   const { dispatch } = UseFormReducer();
+  const [formStatus, setFormStatus] = useState<Partial<TState["status"]>>({});
   const {
     register,
     handleSubmit,
@@ -31,7 +34,8 @@ export default function CustomForm() {
       });
       dispatch({ type: EFORM.SUCCESS });
       //! Form Debugging
-      // console.log(await res.json());
+      const status = await res.json();
+      setFormStatus(status);
     } catch (error) {
       dispatch({ type: EFORM.ERR });
       throw Error(error || "something is wrong");
@@ -43,7 +47,7 @@ export default function CustomForm() {
 
   return (
     <>
-      <StatusBar />
+      <StatusBar status={formStatus} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           {...register("name", {
