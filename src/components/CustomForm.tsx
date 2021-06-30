@@ -1,7 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { UseFormReducer, EFORM, TState } from "../helper/FormReducer";
+import type { TState } from "../helper/FormReducer";
+import { UseFormReducer, EFORM } from "../helper/FormReducer";
 import StatusBar from "./StatusBar";
 
 const curr = new Date();

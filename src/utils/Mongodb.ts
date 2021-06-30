@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { TState } from "../helper/FormReducer";
+import type { TState } from "../helper/FormReducer";
 
 const client = MongoClient.connect(`${process.env.URL}`, {
   useNewUrlParser: true,
