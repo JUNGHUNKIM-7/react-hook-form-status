@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { UseFormReducer } from "../helper/formReducer/FormReducer";
-import { EFORM, TState } from "../helper/formReducer/FormReducerInit";
+import { TState } from "../helper/formReducer/FormReducerInit";
+import { EFORM } from "../helper/formReducer/FormReducerInit";
 import StatusBar from "./StatusBar";
 
-const curr = new Date();
-const utc = curr.getTime() + curr.getTimezoneOffset() * 60 * 1000;
+const utc = new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000;
 const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
 
-export default function CustomForm() {
+export default function FormControl() {
   const { dispatch } = UseFormReducer();
   const [formStatus, setFormStatus] = useState<Partial<TState["status"]>>({});
   const {

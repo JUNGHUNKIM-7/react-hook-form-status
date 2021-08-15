@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { EFORM, UseFormReducer } from "../helper/FormReducer";
-import type { TState } from "../helper/FormReducer";
 import { useRouter } from "next/router";
+import { UseFormReducer } from "../helper/formReducer/FormReducer";
+import { EFORM, TState } from "../helper/formReducer/FormReducerInit";
 
 export default function StatusBar({
   status,

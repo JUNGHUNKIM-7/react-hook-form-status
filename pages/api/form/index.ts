@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { TState } from "../../../src/helper/FormReducer";
+import { TState } from "../../../src/helper/formReducer/FormReducerInit";
 import { insertObj } from "../../../src/utils/Mongodb";
 
 // type RecursivePartial<T> = {

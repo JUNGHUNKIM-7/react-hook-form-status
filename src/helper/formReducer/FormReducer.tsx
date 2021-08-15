@@ -1,35 +1,5 @@
 import { createContext, ReactNode, useReducer, useContext } from "react";
-
-const INIT = {
-  form: {
-    name: "",
-    email: "",
-    date: "",
-  },
-  status: {
-    pending: false,
-    success: false,
-    err: false,
-  },
-  showModal: false,
-};
-
-export type TState = typeof INIT;
-
-export enum EFORM {
-  SETDATA = "setData",
-  PENDING = "pending",
-  SUCCESS = "success",
-  ERR = "err",
-  MODAL = "show Modal",
-}
-
-type TAction =
-  | { type: EFORM.SETDATA; obj: TState["form"] }
-  | { type: EFORM.PENDING }
-  | { type: EFORM.SUCCESS }
-  | { type: EFORM.ERR }
-  | { type: EFORM.MODAL };
+import { TState, TAction, EFORM, INIT } from "./FormReducerInit";
 
 const formReducer = (state: TState, action: TAction) => {
   switch (action.type) {
@@ -82,7 +52,7 @@ const FormReducer = () => {
 
 const formContext = createContext<ReturnType<typeof FormReducer> | null>(null);
 
-export const FormProvider = ({ children }: { children: ReactNode }) => (
+export const ProviderFormContext = ({ children }: { children: ReactNode }) => (
   <formContext.Provider value={FormReducer()}>{children}</formContext.Provider>
 );
 
